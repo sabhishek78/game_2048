@@ -43,293 +43,37 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[0][0].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[0][1].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[0][2].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[0][3].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
+                  Cell(element: matrix[0][0]),
+                  Cell(element: matrix[0][1]),
+                  Cell(element: matrix[0][2]),
+                  Cell(element: matrix[0][3]),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    child: Center(
-                      child: Text(
-                           matrix[1][0].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[1][1].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[1][2].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[1][3].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
+                  Cell(element: matrix[1][0]),
+                  Cell(element: matrix[1][1]),
+                  Cell(element: matrix[1][2]),
+                  Cell(element: matrix[1][3]),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[2][0].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[2][1].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[2][2].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[2][3].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
+                  Cell(element: matrix[2][0]),
+                  Cell(element: matrix[2][1]),
+                  Cell(element: matrix[2][2]),
+                  Cell(element: matrix[2][3]),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[3][0].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[3][1].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[3][2].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
-                  Container(
-                    child: Center(
-                      child: Text(
-                        matrix[3][3].toString(),
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                  ),
+                  Cell(element: matrix[3][0]),
+                  Cell(element: matrix[3][1]),
+                  Cell(element: matrix[3][2]),
+                  Cell(element: matrix[3][3]),
                 ],
               ),
               Row(
@@ -495,5 +239,40 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ) ;// This trailing comma makes auto-formatting nicer for build methods.
 
+  }
+}
+
+class Cell extends StatefulWidget {
+  const Cell({
+    Key key,
+    @required this.element,
+  }) : super(key: key);
+
+  final int element;
+
+  @override
+  _CellState createState() => _CellState();
+}
+
+class _CellState extends State<Cell> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(
+          widget.element.toString(),
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      width: 80,
+      height: 80,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+    );
   }
 }
