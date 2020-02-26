@@ -40,126 +40,17 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
              mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              RowGrid(matrix: matrix,rowNumber: 0),
+              RowGrid(matrix: matrix,rowNumber: 1),
+              RowGrid(matrix: matrix,rowNumber: 2),
+              RowGrid(matrix: matrix,rowNumber: 3),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Cell(element: matrix[0][0]),
-                  Cell(element: matrix[0][1]),
-                  Cell(element: matrix[0][2]),
-                  Cell(element: matrix[0][3]),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Cell(element: matrix[1][0]),
-                  Cell(element: matrix[1][1]),
-                  Cell(element: matrix[1][2]),
-                  Cell(element: matrix[1][3]),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Cell(element: matrix[2][0]),
-                  Cell(element: matrix[2][1]),
-                  Cell(element: matrix[2][2]),
-                  Cell(element: matrix[2][3]),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Cell(element: matrix[3][0]),
-                  Cell(element: matrix[3][1]),
-                  Cell(element: matrix[3][2]),
-                  Cell(element: matrix[3][3]),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_left),
-                      tooltip: 'Left Slide',
-                      onPressed: () {
-                        matrix=leftSlideMatrix(matrix);
-                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                        if(containsNumber(0, matrix)){
-                          setState(() {
-                          });
-                        }else{
-                         s='Game over';
-                         setState(() {
-                         });
-                        }
-
-                      },
-                    ),
-                    width: 80,
-                    height: 80,
-                  ),
-                  Container(
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_upward),
-                      tooltip: 'Up Slide',
-                      onPressed: () {
-                        matrix=upSlideMatrix(matrix);
-                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                        if(containsNumber(0, matrix)){
-                          setState(() {
-                          });
-                        }else{
-                          s='Game over';
-                          setState(() {
-                          });
-                        }
-                      },
-                    ),
-                    width: 80,
-                    height: 80,
-                  ),
-                  Container(
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_downward),
-                      tooltip: 'Down Slide',
-                      onPressed: () {
-                        matrix=downSlideMatrix(matrix);
-                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                        if(containsNumber(0, matrix)){
-                          setState(() {
-                          });
-                        }else{
-                          s='Game over';
-                          setState(() {
-                          });
-                        }
-                      },
-                    ),
-                    width: 80,
-                    height: 80,
-                  ),
-                  Container(
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_right),
-                      tooltip: 'Right Slide',
-                      onPressed: () {
-                        matrix=rightSlideMatrix(matrix);
-                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                        if(containsNumber(0, matrix)){
-                          setState(() {
-                          });
-                        }else{
-                          s='Game over';
-                          setState(() {
-                          });
-                        }
-                      },
-                    ),
-                    width: 80,
-                    height: 80,
-                  ),
+                  buildContainer(leftSlideMatrix),
+                  buildContainer(upSlideMatrix),
+                  buildContainer(downSlideMatrix),
+                  buildContainer(rightSlideMatrix),
                 ],
               ),
               Row(
@@ -239,6 +130,56 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ) ;// This trailing comma makes auto-formatting nicer for build methods.
 
+  }
+
+  Container buildContainer(function) {
+    return Container(
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_left),
+                    tooltip: 'Left Slide',
+                    onPressed: () {
+                      matrix=function(matrix);
+                      containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+                      if(containsNumber(0, matrix)){
+                        setState(() {
+                        });
+                      }else{
+                       s='Game over';
+                       setState(() {
+                       });
+                      }
+
+                    },
+                  ),
+                  width: 80,
+                  height: 80,
+                );
+  }
+}
+
+class RowGrid extends StatelessWidget {
+  const RowGrid({
+    Key key,
+    @required this.matrix,
+    @required this.rowNumber,
+  }) : super(key: key);
+
+  final List<List<int>> matrix;
+  final int rowNumber;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+//        for(int i=0;i<4;i++){  //have to ask
+//          Cell(element: matrix[rowNumber][i]) ;
+//        }
+        Cell(element: matrix[rowNumber][0]),
+        Cell(element: matrix[rowNumber][1]),
+        Cell(element: matrix[rowNumber][2]),
+        Cell(element: matrix[rowNumber][3]),
+      ],
+    );
   }
 }
 
