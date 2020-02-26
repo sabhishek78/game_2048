@@ -47,10 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  buildContainer(leftSlideMatrix),
-                  buildContainer(upSlideMatrix),
-                  buildContainer(downSlideMatrix),
-                  buildContainer(rightSlideMatrix),
+                  buildContainer(leftSlideMatrix,Icons.arrow_left),
+                  buildContainer(upSlideMatrix,Icons.arrow_upward),
+                  buildContainer(downSlideMatrix,Icons.arrow_downward),
+                  buildContainer(rightSlideMatrix,Icons.arrow_right),
                 ],
               ),
               Row(
@@ -132,11 +132,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-  Container buildContainer(function) {
+  Container buildContainer(function,icon) {
     return Container(
                   child: IconButton(
-                    icon: Icon(Icons.arrow_left),
-                    tooltip: 'Left Slide',
+                    icon: Icon(icon),
+                    iconSize: 50,
+                    color: Colors.blue,
+
                     onPressed: () {
                       matrix=function(matrix);
                       containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
@@ -212,7 +214,7 @@ class _CellState extends State<Cell> {
       width: 80,
       height: 80,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.blue,
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
     );
   }
