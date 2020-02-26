@@ -1,4 +1,4 @@
-
+import 'package:swipedetector/swipedetector.dart';
 import 'package:flutter/material.dart';
 import 'game_logic.dart';
 void main() => runApp(MyApp());
@@ -36,403 +36,464 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[0][0].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+        child: SwipeDetector(
+          child: Column(
+             mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[0][0].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[0][1].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[0][1].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[0][2].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[0][2].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[0][3].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[0][3].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  child: Center(
-                    child: Text(
-                         matrix[1][0].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    child: Center(
+                      child: Text(
+                           matrix[1][0].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[1][1].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[1][1].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[1][2].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[1][2].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[1][3].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[1][3].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[2][0].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[2][0].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[2][1].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[2][1].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[2][2].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[2][2].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[2][3].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[2][3].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[3][0].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[3][0].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[3][1].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[3][1].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[3][2].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[3][2].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      matrix[3][3].toString(),
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  Container(
+                    child: Center(
+                      child: Text(
+                        matrix[3][3].toString(),
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
                   ),
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_left),
-                    tooltip: 'Left Slide',
-                    onPressed: () {
-                      matrix=leftSlideMatrix(matrix);
-                      containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                      if(containsNumber(0, matrix)){
-                        setState(() {
-                        });
-                      }else{
-                       s='Game over';
-                       setState(() {
-                       });
-                      }
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_left),
+                      tooltip: 'Left Slide',
+                      onPressed: () {
+                        matrix=leftSlideMatrix(matrix);
+                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+                        if(containsNumber(0, matrix)){
+                          setState(() {
+                          });
+                        }else{
+                         s='Game over';
+                         setState(() {
+                         });
+                        }
 
-                    },
+                      },
+                    ),
+                    width: 80,
+                    height: 80,
                   ),
-                  width: 80,
-                  height: 80,
-                ),
-                Container(
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_upward),
-                    tooltip: 'Up Slide',
-                    onPressed: () {
-                      matrix=upSlideMatrix(matrix);
-                      containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                      if(containsNumber(0, matrix)){
-                        setState(() {
-                        });
-                      }else{
-                        s='Game over';
-                        setState(() {
-                        });
-                      }
-                    },
+                  Container(
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_upward),
+                      tooltip: 'Up Slide',
+                      onPressed: () {
+                        matrix=upSlideMatrix(matrix);
+                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+                        if(containsNumber(0, matrix)){
+                          setState(() {
+                          });
+                        }else{
+                          s='Game over';
+                          setState(() {
+                          });
+                        }
+                      },
+                    ),
+                    width: 80,
+                    height: 80,
                   ),
-                  width: 80,
-                  height: 80,
-                ),
-                Container(
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_downward),
-                    tooltip: 'Down Slide',
-                    onPressed: () {
-                      matrix=downSlideMatrix(matrix);
-                      containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                      if(containsNumber(0, matrix)){
-                        setState(() {
-                        });
-                      }else{
-                        s='Game over';
-                        setState(() {
-                        });
-                      }
-                    },
+                  Container(
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_downward),
+                      tooltip: 'Down Slide',
+                      onPressed: () {
+                        matrix=downSlideMatrix(matrix);
+                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+                        if(containsNumber(0, matrix)){
+                          setState(() {
+                          });
+                        }else{
+                          s='Game over';
+                          setState(() {
+                          });
+                        }
+                      },
+                    ),
+                    width: 80,
+                    height: 80,
                   ),
-                  width: 80,
-                  height: 80,
-                ),
-                Container(
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_right),
-                    tooltip: 'Right Slide',
-                    onPressed: () {
-                      matrix=rightSlideMatrix(matrix);
-                      containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                      if(containsNumber(0, matrix)){
-                        setState(() {
-                        });
-                      }else{
-                        s='Game over';
-                        setState(() {
-                        });
-                      }
-                    },
+                  Container(
+                    child: IconButton(
+                      icon: Icon(Icons.arrow_right),
+                      tooltip: 'Right Slide',
+                      onPressed: () {
+                        matrix=rightSlideMatrix(matrix);
+                        containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+                        if(containsNumber(0, matrix)){
+                          setState(() {
+                          });
+                        }else{
+                          s='Game over';
+                          setState(() {
+                          });
+                        }
+                      },
+                    ),
+                    width: 80,
+                    height: 80,
                   ),
-                  width: 80,
-                  height: 80,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RichText(
-                  text: TextSpan(
-                    text: s,
-                    style: DefaultTextStyle.of(context).style,
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RichText(
+                    text: TextSpan(
+                      text: s,
+                      style: DefaultTextStyle.of(context).style,
 
-                  ),
-                )
-              ],
-            )
-          ],
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),onSwipeUp: () {
+            print("Swip up detected");
+          matrix=upSlideMatrix(matrix);
+          containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+          if(containsNumber(0, matrix)){
+            setState(() {
+            });
+          }else{
+            s='Game over';
+            setState(() {
+            });
+          }
+
+        },
+          onSwipeDown: () {
+            matrix=downSlideMatrix(matrix);
+            containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+            if(containsNumber(0, matrix)){
+              setState(() {
+              });
+            }else{
+              s='Game over';
+              setState(() {
+              });
+            }
+
+          },
+          onSwipeLeft: () {
+            matrix=leftSlideMatrix(matrix);
+            containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+            if(containsNumber(0, matrix)){
+              setState(() {
+              });
+            }else{
+              s='Game over';
+              setState(() {
+              });
+            }
+
+          },
+          onSwipeRight: () {
+            matrix=rightSlideMatrix(matrix);
+            containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
+            if(containsNumber(0, matrix)){
+              setState(() {
+              });
+            }else{
+              s='Game over';
+              setState(() {
+              });
+            }
+
+          },
+          swipeConfiguration: SwipeConfiguration(
+              verticalSwipeMinVelocity: 100.0,
+              verticalSwipeMinDisplacement: 50.0,
+              verticalSwipeMaxWidthThreshold:100.0,
+              horizontalSwipeMaxHeightThreshold: 50.0,
+              horizontalSwipeMinDisplacement:50.0,
+              horizontalSwipeMinVelocity: 200.0),
+        )
         ),
-      ),
-       // This trailing comma makes auto-formatting nicer for build methods.
-    );
+      ) ;// This trailing comma makes auto-formatting nicer for build methods.
+
   }
 }
