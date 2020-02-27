@@ -23,6 +23,7 @@ void playGame(matrix){
     switch(move){
       case 'l': print("Making left move");
       matrix=leftSlideMatrix(matrix);
+
       break;
       case 'r': print("Making right move");
       matrix=rightSlideMatrix(matrix);
@@ -124,20 +125,11 @@ List<int>  slideZeros(List<int>tiles) {
   return result;
 }
 List<List<int>> upSlideMatrix(List<List<int>> matrix){
-  print("entering upslide");
-  print(matrix);
   matrix=transpose(matrix);
-  print("matrix after transpose");
-  print(matrix);
-  // console.log('transposed matrix='+matrix);
   for(var i=0;i<4;i++){
     matrix[i]=leftSlide(matrix[i]);
   }
-  print('matrix after left slide');
-  print(matrix);
   matrix=transpose(matrix);
-  print('matrix after second transpose');
-  print(matrix);
   return matrix;
 }
 List<List<int>>  downSlideMatrix(List<List<int>> matrix){

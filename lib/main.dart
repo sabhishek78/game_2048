@@ -28,6 +28,99 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<List<int>> matrix=initializeMatrix();
   String s='';
+  bool adjacentCellsMatch(matrix){
+    int i,j;
+    for(i=0;i<matrix.length;i++){
+      for(j=0;j<matrix[i].length;j++){
+        return checkLeft(matrix,i,j)||checkRight(matrix,i,j)||checkUp(matrix,i,j)||checkDown(matrix,i,j);
+      }
+    }
+  }
+  bool checkLeft(matrix,i,j){
+    if(j==0 ){
+      return false;
+    }
+    else{
+      if(matrix[i][j-1]==matrix[i][j]){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
+  bool checkRight(matrix,i,j){
+    if(j==3){
+      return false;
+    }
+    else{
+      if(matrix[i][j+1]==matrix[i][j]){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
+  bool checkUp(matrix,i,j){
+    if(i==0){
+      return false;
+    }
+    else{
+      if(matrix[i-1][j]==matrix[i][j]){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
+  bool checkDown(matrix,i,j){
+    if(i==3){
+      return false;
+    }
+    else{
+      if(matrix[i+1][j]==matrix[i][j]){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
+  void checkWinGameOver() {
+    if(containsNumber(2048, matrix)){
+      s='You Win!!';
+    }
+    else{
+      if(containsNumber(0, matrix)){
+        matrix=add2ToEmptySpace(matrix);
+      }
+      else{// if 0 is not present check for adjacent matching
+        if(!adjacentCellsMatch(matrix)){
+          s='Game Over';
+        }
+      }
+    }
+    setState(() {});
+  }
+  Container buildContainer(function,icon) {
+    return Container(
+      child: IconButton(
+        icon: Icon(icon),
+        iconSize: 50,
+        color: Colors.blue,
+
+        onPressed: () {
+          matrix=function(matrix);
+          checkWinGameOver();
+
+        },
+      ),
+      width: 80,
+      height: 80,
+    );
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -36,128 +129,62 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: SwipeDetector(
-          child: Column(
-             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              RowGrid(matrix: matrix,rowNumber: 0),
-              RowGrid(matrix: matrix,rowNumber: 1),
-              RowGrid(matrix: matrix,rowNumber: 2),
-              RowGrid(matrix: matrix,rowNumber: 3),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  buildContainer(leftSlideMatrix,Icons.arrow_left),
-                  buildContainer(upSlideMatrix,Icons.arrow_upward),
-                  buildContainer(downSlideMatrix,Icons.arrow_downward),
-                  buildContainer(rightSlideMatrix,Icons.arrow_right),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      text: s,
-                      style: DefaultTextStyle.of(context).style,
+        child: GestureDetector(
+            onHorizontalDragEnd: (DragEndDetails details){
+              details.primaryVelocity>0?matrix=leftSlideMatrix(matrix):matrix=rightSlideMatrix(matrix);
+                matrix=add2ToEmptySpace(matrix);
+                checkWinGameOver();
+                //setState(() {});
+              },
+            onVerticalDragEnd: (DragEndDetails details){
+              details.primaryVelocity>0?matrix=upSlideMatrix(matrix):matrix=rightSlideMatrix(matrix);
+              matrix=add2ToEmptySpace(matrix);
+              checkWinGameOver();
+             // setState(() {});
+            },
+          child:
+          Container(
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                RowGrid(matrix: matrix, rowNumber: 0),
+                RowGrid(matrix: matrix, rowNumber: 1),
+                RowGrid(matrix: matrix, rowNumber: 2),
+                RowGrid(matrix: matrix, rowNumber: 3),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    buildContainer(leftSlideMatrix, Icons.arrow_left),
+                    buildContainer(upSlideMatrix, Icons.arrow_upward),
+                    buildContainer(downSlideMatrix, Icons.arrow_downward),
+                    buildContainer(rightSlideMatrix, Icons.arrow_right),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        text: s,
+                        style: DefaultTextStyle
+                            .of(context)
+                            .style,
 
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),onSwipeUp: () {
-            print("Swip up detected");
-          matrix=upSlideMatrix(matrix);
-          containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-          if(containsNumber(0, matrix)){
-            setState(() {
-            });
-          }else{
-            s='Game over';
-            setState(() {
-            });
-          }
-
-        },
-          onSwipeDown: () {
-            matrix=downSlideMatrix(matrix);
-            containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-            if(containsNumber(0, matrix)){
-              setState(() {
-              });
-            }else{
-              s='Game over';
-              setState(() {
-              });
-            }
-
-          },
-          onSwipeLeft: () {
-            matrix=leftSlideMatrix(matrix);
-            containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-            if(containsNumber(0, matrix)){
-              setState(() {
-              });
-            }else{
-              s='Game over';
-              setState(() {
-              });
-            }
-
-          },
-          onSwipeRight: () {
-            matrix=rightSlideMatrix(matrix);
-            containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-            if(containsNumber(0, matrix)){
-              setState(() {
-              });
-            }else{
-              s='Game over';
-              setState(() {
-              });
-            }
-
-          },
-          swipeConfiguration: SwipeConfiguration(
-              verticalSwipeMinVelocity: 100.0,
-              verticalSwipeMinDisplacement: 50.0,
-              verticalSwipeMaxWidthThreshold:100.0,
-              horizontalSwipeMaxHeightThreshold: 50.0,
-              horizontalSwipeMinDisplacement:50.0,
-              horizontalSwipeMinVelocity: 200.0),
-        )
-        ),
-      ) ;// This trailing comma makes auto-formatting nicer for build methods.
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),),
+      ),
+    );
 
   }
 
-  Container buildContainer(function,icon) {
-    return Container(
-                  child: IconButton(
-                    icon: Icon(icon),
-                    iconSize: 50,
-                    color: Colors.blue,
-
-                    onPressed: () {
-                      matrix=function(matrix);
-                      containsNumber(2048, matrix)? s='You Win!!': matrix=add2ToEmptySpace(matrix);
-                      if(containsNumber(0, matrix)){
-                        setState(() {
-                        });
-                      }else{
-                       s='Game over';
-                       setState(() {
-                       });
-                      }
-
-                    },
-                  ),
-                  width: 80,
-                  height: 80,
-                );
-  }
 }
+
 
 class RowGrid extends StatelessWidget {
   const RowGrid({
@@ -170,17 +197,10 @@ class RowGrid extends StatelessWidget {
   final int rowNumber;
   @override
   Widget build(BuildContext context) {
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-//        for(int i=0;i<4;i++){  //have to ask
-//          Cell(element: matrix[rowNumber][i]) ;
-//        }
-        Cell(element: matrix[rowNumber][0]),
-        Cell(element: matrix[rowNumber][1]),
-        Cell(element: matrix[rowNumber][2]),
-        Cell(element: matrix[rowNumber][3]),
-      ],
+      children: matrix[rowNumber].map((item)=> Cell(element:item)).toList(),
     );
   }
 }
@@ -201,6 +221,7 @@ class _CellState extends State<Cell> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(4),
       child: Center(
         child: Text(
           widget.element.toString(),
