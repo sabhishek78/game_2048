@@ -11,40 +11,6 @@
 import 'dart:io';
 import 'dart:math' show Random;
 import 'main.dart';
-void playGame(matrix){
-
-  printMatrix(matrix);
-  var moveCount=0;
-  while(containsNumber(0,matrix)){
-    moveCount++;
-    print("This is the $moveCount th move");
-    print("Enter l for left .Enter r for right. Enter u for up. Enter d for down");
-    var move=stdin.readLineSync();
-    switch(move){
-      case 'l': print("Making left move");
-      matrix=leftSlideMatrix(matrix);
-
-      break;
-      case 'r': print("Making right move");
-      matrix=rightSlideMatrix(matrix);
-      break;
-      case 'u': print("Making Up move");
-      matrix=upSlideMatrix(matrix);
-      break;
-      case 'd': print("Making Down move");
-      matrix=downSlideMatrix(matrix);
-      break;
-    }
-    matrix=add2ToEmptySpace(matrix);
-    printMatrix(matrix);
-    if(containsNumber(2048,matrix)){
-      print("You Win!!"+"Number of Moves=$moveCount ");
-    }
-  }
-  if(!containsNumber(2048,matrix)){
-    print("Game Over!!"+"Number of Moves=$moveCount");
-  }
-}
 
 bool containsNumber(int number,List<List<int>>matrix){
   for(var i=0;i<matrix.length;i++){
@@ -59,16 +25,6 @@ List<List<int>> initializeMatrix(){
   List<List<int>>matrix=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
    matrix=add2ToEmptySpace(matrix);
    return matrix;
-}
-
-void printMatrix(matrix){
-  for(var i=0;i<matrix.length;i++){
-    var str='';
-    for(var j=0;j<matrix[i].length;j++){
-      str=str+'['+(matrix[i][j]).toString()+']';
-    }
-    print(str);
-  }
 }
 List<List<int>> transpose(List<List<int>>matrix) {
 
@@ -98,18 +54,14 @@ List<int> leftSlide(List<int>tiles) {
   }
   return tiles;
 }
-List<List<int>>  leftSlideMatrix(List<List<int>> matrix) {
+
+List<List<int>> leftRightSlideMatrix(List<List<int>> matrix,String s) {
   for(var i=0;i<matrix.length;i++){
-    matrix[i]=leftSlide(matrix[i]);
+      s=='l'? matrix[i]=leftSlide(matrix[i]):matrix[i]=rightSlide(matrix[i]);
+    }
+    return matrix;
   }
-  return matrix;
-}
-List<List<int>> rightSlideMatrix(List<List<int>> matrix) {
-  for(var i=0;i<matrix.length;i++){
-    matrix[i]=rightSlide(matrix[i]);
-  }
-  return matrix;
-}
+
 List<int>  slideZeros(List<int>tiles) {
   List<int> result = [];
   for (var i = 0; i < tiles.length; i++) {
@@ -124,25 +76,14 @@ List<int>  slideZeros(List<int>tiles) {
   }
   return result;
 }
-List<List<int>> upSlideMatrix(List<List<int>> matrix){
+List<List<int>>  upDownSlideMatrix(List<List<int>> matrix,String s){
   matrix=transpose(matrix);
-  for(var i=0;i<4;i++){
-    matrix[i]=leftSlide(matrix[i]);
-  }
-  matrix=transpose(matrix);
-  return matrix;
-}
-List<List<int>>  downSlideMatrix(List<List<int>> matrix){
-  matrix=transpose(matrix);
-  // console.log('transposed matrix='+matrix);
   for(var i=0;i<matrix.length;i++){
-    matrix[i]=rightSlide(matrix[i]);
+    s=='u'?matrix[i]=leftSlide(matrix[i]):matrix[i]=rightSlide(matrix[i]);
   }
-  //  console.log("matrix afterright slide="+matrix);
   matrix=transpose(matrix);
   return matrix;
 }
-
 
 List<List<int>>  add2ToEmptySpace(List<List<int>> matrix){
   var row;
@@ -159,7 +100,4 @@ List<List<int>>  add2ToEmptySpace(List<List<int>> matrix){
   matrix[row][col]=2;
   return matrix;
 }
-//void main(){
-//  playGame();
-//}
 

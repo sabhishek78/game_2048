@@ -30,43 +30,28 @@ class _MyHomePageState extends State<MyHomePage> {
   String s='';
   bool adjacentCellsMatch(matrix){
     int i,j;
+    bool match=false;
     for(i=0;i<matrix.length;i++){
       for(j=0;j<matrix[i].length;j++){
-        return checkLeft(matrix,i,j)||checkRight(matrix,i,j)||checkUp(matrix,i,j)||checkDown(matrix,i,j);
+        match=match|| checkLeft(matrix,i,j)||checkRight(matrix,i,j)||checkUp(matrix,i,j)||checkDown(matrix,i,j);
       }
     }
+    return match;
   }
+//  bool adjacentCellsMatch(matrix){
+//    matrix.forEach((e)=>e.forEach((n)=>checkLeft(matrix,e[0],e[1])||checkRight(matrix,e[0],e[1])||checkUp(matrix,e[0],e[1])||checkDown(matrix,e[0],e[1])));
+//  }
   bool checkLeft(matrix,i,j){
-    if(j==0 ){
-      return false;
-    }
-    else{
-      return matrix[i][j-1]==matrix[i][j];
-    }
+    return j==0?false:matrix[i][j-1]==matrix[i][j];
   }
   bool checkRight(matrix,i,j){
-    if(j==3){
-      return false;
-    }
-    else{
-      return matrix[i][j+1]==matrix[i][j];
-    }
+    return j==3? false:matrix[i][j+1]==matrix[i][j];
   }
   bool checkUp(matrix,i,j){
-    if(i==0){
-      return false;
-    }
-    else{
-      return matrix[i-1][j]==matrix[i][j];
-    }
+    return i==0?false:matrix[i-1][j]==matrix[i][j];
   }
   bool checkDown(matrix,i,j){
-    if(i==3){
-      return false;
-    }
-    else{
-      return matrix[i+1][j]==matrix[i][j];
-    }
+    return i==3?false:matrix[i+1][j]==matrix[i][j];
   }
   void checkWinGameOver() {
     if(containsNumber(2048, matrix)){
@@ -84,18 +69,16 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     setState(() {});
   }
-  Container buildContainer(function,icon) {
+  Container buildIcon(function,icon,s) {
     return Container(
       child: IconButton(
         icon: Icon(icon),
         iconSize: 50,
         color: Colors.blue,
-
         onPressed: () {
-          matrix=function(matrix);
+          matrix=function(matrix,s);
           checkWinGameOver();
-
-        },
+          },
       ),
       width: 80,
       height: 80,
@@ -103,7 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -111,13 +93,13 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: GestureDetector(
             onHorizontalDragEnd: (DragEndDetails details){
-              details.primaryVelocity>0?matrix=leftSlideMatrix(matrix):matrix=rightSlideMatrix(matrix);
+              details.primaryVelocity>0?matrix=leftRightSlideMatrix(matrix,'l'):matrix=leftRightSlideMatrix(matrix,'r');
                 matrix=add2ToEmptySpace(matrix);
                 checkWinGameOver();
                 //setState(() {});
               },
             onVerticalDragEnd: (DragEndDetails details){
-              details.primaryVelocity>0?matrix=upSlideMatrix(matrix):matrix=rightSlideMatrix(matrix);
+              details.primaryVelocity>0?matrix=upDownSlideMatrix(matrix,'u'):matrix=upDownSlideMatrix(matrix,'d');
               matrix=add2ToEmptySpace(matrix);
               checkWinGameOver();
              // setState(() {});
@@ -135,10 +117,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    buildContainer(leftSlideMatrix, Icons.arrow_left),
-                    buildContainer(upSlideMatrix, Icons.arrow_upward),
-                    buildContainer(downSlideMatrix, Icons.arrow_downward),
-                    buildContainer(rightSlideMatrix, Icons.arrow_right),
+                    buildIcon(leftRightSlideMatrix, Icons.arrow_left,'l'),
+                    buildIcon(upDownSlideMatrix, Icons.arrow_upward,'u'),
+                    buildIcon(upDownSlideMatrix, Icons.arrow_downward,'d'),
+                    buildIcon(leftRightSlideMatrix, Icons.arrow_right,'r'),
                   ],
                 ),
                 Row(
@@ -172,12 +154,10 @@ class RowGrid extends StatelessWidget {
     @required this.matrix,
     @required this.rowNumber,
   }) : super(key: key);
-
   final List<List<int>> matrix;
   final int rowNumber;
   @override
   Widget build(BuildContext context) {
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: matrix[rowNumber].map((item)=> Cell(element:item)).toList(),
