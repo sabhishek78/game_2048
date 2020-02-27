@@ -41,12 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return false;
     }
     else{
-      if(matrix[i][j-1]==matrix[i][j]){
-        return true;
-      }
-      else{
-        return false;
-      }
+      return matrix[i][j-1]==matrix[i][j];
     }
   }
   bool checkRight(matrix,i,j){
@@ -54,12 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return false;
     }
     else{
-      if(matrix[i][j+1]==matrix[i][j]){
-        return true;
-      }
-      else{
-        return false;
-      }
+      return matrix[i][j+1]==matrix[i][j];
     }
   }
   bool checkUp(matrix,i,j){
@@ -67,12 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return false;
     }
     else{
-      if(matrix[i-1][j]==matrix[i][j]){
-        return true;
-      }
-      else{
-        return false;
-      }
+      return matrix[i-1][j]==matrix[i][j];
     }
   }
   bool checkDown(matrix,i,j){
@@ -80,12 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return false;
     }
     else{
-      if(matrix[i+1][j]==matrix[i][j]){
-        return true;
-      }
-      else{
-        return false;
-      }
+      return matrix[i+1][j]==matrix[i][j];
     }
   }
   void checkWinGameOver() {
