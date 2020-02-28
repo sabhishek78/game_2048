@@ -21,9 +21,11 @@ bool containsNumber(int number,List<List<int>>matrix){
     }}
   return false;
 }
-List<List<int>> initializeMatrix(){
+List<List<int>> initializeMatrix(int moves){
   List<List<int>>matrix=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
    matrix=add2ToEmptySpace(matrix);
+   moves=0;
+   print('moves initialized to zero');
    return matrix;
 }
 List<List<int>> transpose(List<List<int>>matrix) {
@@ -55,10 +57,12 @@ List<int> leftSlide(List<int>tiles) {
   return tiles;
 }
 
-List<List<int>> leftRightSlideMatrix(List<List<int>> matrix,String s) {
+List<List<int>> leftRightSlideMatrix(List<List<int>> matrix, callback,int moves) {
   for(var i=0;i<matrix.length;i++){
-      s=='l'? matrix[i]=leftSlide(matrix[i]):matrix[i]=rightSlide(matrix[i]);
+       matrix[i]=callback(matrix[i]);
     }
+  moves++;
+  print('moves'+moves.toString());
     return matrix;
   }
 
@@ -76,11 +80,12 @@ List<int>  slideZeros(List<int>tiles) {
   }
   return result;
 }
-List<List<int>>  upDownSlideMatrix(List<List<int>> matrix,String s){
+List<List<int>>  upDownSlideMatrix(List<List<int>> matrix,callback,int moves){
   matrix=transpose(matrix);
   for(var i=0;i<matrix.length;i++){
-    s=='u'?matrix[i]=leftSlide(matrix[i]):matrix[i]=rightSlide(matrix[i]);
+   matrix[i]=callback(matrix[i]);
   }
+  moves++;
   matrix=transpose(matrix);
   return matrix;
 }

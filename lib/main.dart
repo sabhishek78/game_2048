@@ -27,9 +27,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<List<int>> matrix = initializeMatrix();
+  List<List<int>> matrix = initializeMatrix(moves);
   String s = '';
-
+  static int moves;
   bool adjacentCellsMatch(matrix) {
     int i, j;
     bool match = false;
@@ -40,6 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
             checkRight(matrix, i, j) ||
             checkUp(matrix, i, j) ||
             checkDown(matrix, i, j);
+        if(match){
+          return true;
+        }
       }
     }
     return match;
@@ -80,14 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
-  Container buildIcon(function, icon, s) {
+  Container buildIcon(function, icon, callback,moves) {
     return Container(
       child: IconButton(
         icon: Icon(icon),
         iconSize: 50,
         color: Colors.blue,
         onPressed: () {
-          matrix = function(matrix, s);
+          matrix = function(matrix, callback,moves);
           checkWinGameOver();
         },
       ),
@@ -101,11 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: () {
-              matrix = initializeMatrix();
+              matrix = initializeMatrix(moves);
               setState(() {
 
               });
@@ -117,16 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: GestureDetector(
           onHorizontalDragEnd: (DragEndDetails details) {
             details.primaryVelocity > 0
-                ? matrix = leftRightSlideMatrix(matrix, 'l')
-                : matrix = leftRightSlideMatrix(matrix, 'r');
+                ? matrix = leftRightSlideMatrix(matrix, leftSlide,moves)
+                : matrix = leftRightSlideMatrix(matrix, rightSlide,moves);
             matrix = add2ToEmptySpace(matrix);
             checkWinGameOver();
             //setState(() {});
           },
           onVerticalDragEnd: (DragEndDetails details) {
             details.primaryVelocity > 0
-                ? matrix = upDownSlideMatrix(matrix, 'u')
-                : matrix = upDownSlideMatrix(matrix, 'd');
+                ? matrix = upDownSlideMatrix(matrix,leftSlide,moves)
+                : matrix = upDownSlideMatrix(matrix,rightSlide,moves);
             matrix = add2ToEmptySpace(matrix);
             checkWinGameOver();
             // setState(() {});
@@ -136,6 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Text('$moves'+' moves',style: TextStyle(fontWeight: FontWeight.bold),),
                 RowGrid(matrix: matrix, rowNumber: 0),
                 RowGrid(matrix: matrix, rowNumber: 1),
                 RowGrid(matrix: matrix, rowNumber: 2),
@@ -143,10 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    buildIcon(leftRightSlideMatrix, Icons.arrow_left, 'l'),
-                    buildIcon(upDownSlideMatrix, Icons.arrow_upward, 'u'),
-                    buildIcon(upDownSlideMatrix, Icons.arrow_downward, 'd'),
-                    buildIcon(leftRightSlideMatrix, Icons.arrow_right, 'r'),
+                    buildIcon(leftRightSlideMatrix, Icons.arrow_left, leftSlide,moves),
+                    buildIcon(upDownSlideMatrix, Icons.arrow_upward, leftSlide,moves),
+                    buildIcon(upDownSlideMatrix, Icons.arrow_downward,rightSlide,moves),
+                    buildIcon(leftRightSlideMatrix, Icons.arrow_right, rightSlide,moves),
                   ],
                 ),
                 Row(
