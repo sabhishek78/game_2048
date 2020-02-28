@@ -25,11 +25,11 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
-
+int moves=0;
 class _MyHomePageState extends State<MyHomePage> {
-  List<List<int>> matrix = initializeMatrix(moves);
+  List<List<int>> matrix = initializeMatrix();
   String s = '';
-  static int moves;
+
   bool adjacentCellsMatch(matrix) {
     int i, j;
     bool match = false;
@@ -83,14 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
-  Container buildIcon(function, icon, callback,moves) {
+  Container buildIcon(function, icon, callback) {
     return Container(
       child: IconButton(
         icon: Icon(icon),
         iconSize: 50,
         color: Colors.blue,
         onPressed: () {
-          matrix = function(matrix, callback,moves);
+          matrix = function(matrix, callback);
           checkWinGameOver();
         },
       ),
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: () {
-              matrix = initializeMatrix(moves);
+              matrix = initializeMatrix();
               setState(() {
 
               });
@@ -121,16 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: GestureDetector(
           onHorizontalDragEnd: (DragEndDetails details) {
             details.primaryVelocity > 0
-                ? matrix = leftRightSlideMatrix(matrix, leftSlide,moves)
-                : matrix = leftRightSlideMatrix(matrix, rightSlide,moves);
+                ? matrix = leftRightSlideMatrix(matrix, leftSlide)
+                : matrix = leftRightSlideMatrix(matrix, rightSlide);
             matrix = add2ToEmptySpace(matrix);
             checkWinGameOver();
             //setState(() {});
           },
           onVerticalDragEnd: (DragEndDetails details) {
             details.primaryVelocity > 0
-                ? matrix = upDownSlideMatrix(matrix,leftSlide,moves)
-                : matrix = upDownSlideMatrix(matrix,rightSlide,moves);
+                ? matrix = upDownSlideMatrix(matrix,leftSlide)
+                : matrix = upDownSlideMatrix(matrix,rightSlide);
             matrix = add2ToEmptySpace(matrix);
             checkWinGameOver();
             // setState(() {});
@@ -148,10 +148,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    buildIcon(leftRightSlideMatrix, Icons.arrow_left, leftSlide,moves),
-                    buildIcon(upDownSlideMatrix, Icons.arrow_upward, leftSlide,moves),
-                    buildIcon(upDownSlideMatrix, Icons.arrow_downward,rightSlide,moves),
-                    buildIcon(leftRightSlideMatrix, Icons.arrow_right, rightSlide,moves),
+                    buildIcon(leftRightSlideMatrix, Icons.arrow_left, leftSlide),
+                    buildIcon(upDownSlideMatrix, Icons.arrow_upward, leftSlide),
+                    buildIcon(upDownSlideMatrix, Icons.arrow_downward,rightSlide),
+                    buildIcon(leftRightSlideMatrix, Icons.arrow_right, rightSlide),
                   ],
                 ),
                 Row(

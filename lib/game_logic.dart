@@ -21,7 +21,7 @@ bool containsNumber(int number,List<List<int>>matrix){
     }}
   return false;
 }
-List<List<int>> initializeMatrix(int moves){
+List<List<int>> initializeMatrix(){
   List<List<int>>matrix=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
    matrix=add2ToEmptySpace(matrix);
    moves=0;
@@ -57,11 +57,11 @@ List<int> leftSlide(List<int>tiles) {
   return tiles;
 }
 
-List<List<int>> leftRightSlideMatrix(List<List<int>> matrix, callback,int moves) {
+List<List<int>> leftRightSlideMatrix(List<List<int>> matrix, callback) {
   for(var i=0;i<matrix.length;i++){
        matrix[i]=callback(matrix[i]);
     }
-  moves++;
+  moves=moves+1;
   print('moves'+moves.toString());
     return matrix;
   }
@@ -80,7 +80,7 @@ List<int>  slideZeros(List<int>tiles) {
   }
   return result;
 }
-List<List<int>>  upDownSlideMatrix(List<List<int>> matrix,callback,int moves){
+List<List<int>>  upDownSlideMatrix(List<List<int>> matrix,callback){
   matrix=transpose(matrix);
   for(var i=0;i<matrix.length;i++){
    matrix[i]=callback(matrix[i]);
