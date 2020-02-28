@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'game_logic.dart';
 
 void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -25,64 +23,8 @@ class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
-int moves=0;
 class _MyHomePageState extends State<MyHomePage> {
-  List<List<int>> matrix = initializeMatrix();
-  String s = '';
-
-  bool adjacentCellsMatch(matrix) {
-    int i, j;
-    bool match = false;
-    for (i = 0; i < matrix.length; i++) {
-      for (j = 0; j < matrix[i].length; j++) {
-        match = match ||
-            checkLeft(matrix, i, j) ||
-            checkRight(matrix, i, j) ||
-            checkUp(matrix, i, j) ||
-            checkDown(matrix, i, j);
-        if(match){
-          return true;
-        }
-      }
-    }
-    return match;
-  }
-
-//  bool adjacentCellsMatch(matrix){
-//    matrix.forEach((e)=>e.forEach((n)=>checkLeft(matrix,e[0],e[1])||checkRight(matrix,e[0],e[1])||checkUp(matrix,e[0],e[1])||checkDown(matrix,e[0],e[1])));
-//  }
-  bool checkLeft(matrix, i, j) {
-    return j == 0 ? false : matrix[i][j - 1] == matrix[i][j];
-  }
-
-  bool checkRight(matrix, i, j) {
-    return j == 3 ? false : matrix[i][j + 1] == matrix[i][j];
-  }
-
-  bool checkUp(matrix, i, j) {
-    return i == 0 ? false : matrix[i - 1][j] == matrix[i][j];
-  }
-
-  bool checkDown(matrix, i, j) {
-    return i == 3 ? false : matrix[i + 1][j] == matrix[i][j];
-  }
-
-  void checkWinGameOver() {
-    if (containsNumber(2048, matrix)) {
-      s = 'You Win!!';
-    } else {
-      if (containsNumber(0, matrix)) {
-        matrix = add2ToEmptySpace(matrix);
-      } else {
-        // if 0 is not present check for adjacent matching
-        if (!adjacentCellsMatch(matrix)) {
-          s = 'Game Over';
-        }
-      }
-    }
-    setState(() {});
-  }
-
+  GameController newGame= GameController();
   Container buildIcon(function, icon, callback) {
     return Container(
       child: IconButton(
@@ -90,15 +32,17 @@ class _MyHomePageState extends State<MyHomePage> {
         iconSize: 50,
         color: Colors.blue,
         onPressed: () {
-          matrix = function(matrix, callback);
-          checkWinGameOver();
+          function(callback);
+          newGame.checkWinGameOver();
+          setState(() {
+
+          });
         },
       ),
       width: 80,
       height: 80,
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,10 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: () {
-              matrix = initializeMatrix();
-              setState(() {
-
-              });
+              newGame.resetGame();
+              setState(() {});
             },
           ),
         ],
@@ -121,37 +63,41 @@ class _MyHomePageState extends State<MyHomePage> {
         child: GestureDetector(
           onHorizontalDragEnd: (DragEndDetails details) {
             details.primaryVelocity > 0
-                ? matrix = leftRightSlideMatrix(matrix, leftSlide)
-                : matrix = leftRightSlideMatrix(matrix, rightSlide);
-            matrix = add2ToEmptySpace(matrix);
-            checkWinGameOver();
-            //setState(() {});
+                ? newGame.leftSlideMatrix()
+                : newGame.rightSlideMatrix();
+            newGame.add2ToEmptySpace();
+            newGame.checkWinGameOver();
+            setState(() {});
           },
           onVerticalDragEnd: (DragEndDetails details) {
-            details.primaryVelocity > 0
-                ? matrix = upDownSlideMatrix(matrix,leftSlide)
-                : matrix = upDownSlideMatrix(matrix,rightSlide);
-            matrix = add2ToEmptySpace(matrix);
-            checkWinGameOver();
-            // setState(() {});
+            details.primaryVelocity > 0 ? newGame.upSlideMatrix() : newGame.downSlideMatrix();
+            newGame.add2ToEmptySpace();
+            newGame.checkWinGameOver();
+             setState(() {});
           },
           child: Container(
             color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('$moves'+' moves',style: TextStyle(fontWeight: FontWeight.bold),),
-                RowGrid(matrix: matrix, rowNumber: 0),
-                RowGrid(matrix: matrix, rowNumber: 1),
-                RowGrid(matrix: matrix, rowNumber: 2),
-                RowGrid(matrix: matrix, rowNumber: 3),
+                Text(
+                  '${newGame.moves}' + ' moves',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                RowGrid(matrix: newGame.matrix, rowNumber: 0),
+                RowGrid(matrix: newGame.matrix, rowNumber: 1),
+                RowGrid(matrix: newGame.matrix, rowNumber: 2),
+                RowGrid(matrix: newGame.matrix, rowNumber: 3),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-                    buildIcon(leftRightSlideMatrix, Icons.arrow_left, leftSlide),
-                    buildIcon(upDownSlideMatrix, Icons.arrow_upward, leftSlide),
-                    buildIcon(upDownSlideMatrix, Icons.arrow_downward,rightSlide),
-                    buildIcon(leftRightSlideMatrix, Icons.arrow_right, rightSlide),
+                    buildIcon(
+                        newGame.leftRightSlideMatrix, Icons.arrow_left, newGame.leftSlide),
+                    buildIcon(newGame.upDownSlideMatrix, Icons.arrow_upward, newGame.leftSlide),
+                    buildIcon(
+                        newGame.upDownSlideMatrix, Icons.arrow_downward, newGame.rightSlide),
+                    buildIcon(
+                        newGame.leftRightSlideMatrix, Icons.arrow_right, newGame.rightSlide),
                   ],
                 ),
                 Row(
@@ -159,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     RichText(
                       text: TextSpan(
-                        text: s,
+                        text: newGame.status,
                         style: DefaultTextStyle.of(context).style,
                       ),
                     )
@@ -191,7 +137,6 @@ class RowGrid extends StatelessWidget {
     );
   }
 }
-
 class Cell extends StatefulWidget {
   const Cell({
     Key key,
@@ -203,7 +148,6 @@ class Cell extends StatefulWidget {
   @override
   _CellState createState() => _CellState();
 }
-
 class _CellState extends State<Cell> {
   @override
   Widget build(BuildContext context) {
